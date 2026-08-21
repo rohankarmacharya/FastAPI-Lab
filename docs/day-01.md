@@ -342,3 +342,143 @@ async def get_users():
     return users
 ```
 While the application is waiting for the database operation, the async system can work on other requests rather than simply sitting there doing nothing.
+
+## 11. Let's build our Mini Project: Basic Developer API
+
+We're going to create a tiny API for developers. Our first version will have:
+
+```http
+GET /
+GET /developers
+GET /developers/{developer_id}
+```
+
+We'll keep the data in memory for now.
+- No database.
+- No authentication.
+- No fancy architecture.
+- Just FastAPI fundamentals.
+
+### Project structure
+Create:
+```text
+fastapi-lab/
+└── day-01/
+    ├── main.py
+    └── requirements.txt
+```
+
+Inside `requirements.txt`:
+```text
+fastapi
+uvicorn[standard]
+```
+
+Install them:
+```bash
+pip install -r requirements.txt
+```
+
+Then create `main.py`:
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def root():
+    return {"message": "Welcome to Developer API"}
+
+@app.get("/developers")
+def get_developers():
+    return [
+        {
+            "id": 1,
+            "name": "Rohan",
+            "role": "Backend Developer",
+        },
+        {
+            "id": 2,
+            "name": "Jihyo",
+            "role": "Frontend Developer",
+        },
+    ]
+```
+
+Run:
+```bash
+uvicorn main:app --reload
+```
+
+You should see something similar to:
+```text
+Uvicorn running on http://127.0.0.1:8000
+```
+
+Now visit `http://127.0.0.1:8000`. You should get:
+```json
+{
+  "message": "Welcome to Developer API"
+}
+```
+
+Then visit `http://127.0.0.1:8000/developers`, and you'll get our developer list.
+
+---
+
+## 12. Now open Swagger
+
+Go to `http://127.0.0.1:8000/docs`. You should see our endpoints.
+
+Something like:
+
+**Developer API**
+- `GET /`
+- `GET /developers`
+
+Click:
+`GET /developers` → **Try it out** → **Execute**
+
+And boom — you're making an API request directly from Swagger. That's FastAPI doing a lot of work for us.
+
+---
+
+## 13. Our first mental model
+
+Before we move further, make sure this picture makes sense:
+
+```text
+                 [ Client ]
+                     │ (HTTP Request)
+                     ▼
+                [ Uvicorn ]
+                     │ (ASGI Protocol)
+                     ▼
+                [ FastAPI ]
+                     │
+                     ▼
+             [ Route matching ]
+                     │
+                     ▼
+             [ Python handler ]
+                     │
+                     ▼
+              [ Return data ]
+                     │
+                     ▼
+           [ FastAPI response ]
+                     │ (HTTP/JSON)
+                     ▼
+                 [ Client ]
+```
+
+### And the roles:
+| Component | Role |
+|-----------|------|
+| **FastAPI** | builds the API |
+| **Uvicorn** | runs/serves the application |
+| **ASGI** | communication standard between server and app |
+| **Route** | connects HTTP method + URL to a function |
+| **Handler** | your Python function |
+| **OpenAPI** | describes your API |
+| **Swagger** | interactive UI for that API description |
