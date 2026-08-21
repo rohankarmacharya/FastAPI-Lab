@@ -1,6 +1,53 @@
-# FastAPI Learning
+# Welcome!
+*This is my hands-on FastAPI laboratory, where I'll be documenting my experiments, concepts, and projects as I learn modern Python backend development and AI.*
 
-This repo contains my FastAPI learning notes and examples.
+**My Goal:** By the end of this journey, I aim to be comfortable building a production-style FastAPI backend and understand the framework well enough to confidently start integrating an AI Concierge into my portfolio.
+
+## Curriculum
+- [Week 1 — FastAPI & HTTP Fundamentals](week-01.md)
+- [Week 2 — Real Backend Development](week-02.md)
+- [Week 3 — Advanced FastAPI + AI Preparation](week-03.md)
+
+## Our Final Destination
+The progression will basically be:
+
+```text
+                    FASTAPI LAB
+                         │
+                         ▼
+                 FastAPI Fundamentals
+                         │
+                         ▼
+                  Backend Development
+                         │
+                         ▼
+                 Async + PostgreSQL
+                         │
+                         ▼
+              Auth + APIs + Testing
+                         │
+                         ▼
+               Streaming + WebSockets
+                         │
+                         ▼
+                    External APIs
+                         │
+                         ▼
+                  AI API Integration
+                         │
+                         ▼
+                       RAG
+                         │
+                         ▼
+                 ┌──────────────────┐
+                 │   AI CONCIERGE   │
+                 └──────────────────┘
+```
+
+*And that's the part I'm particularly excited about: we're not learning FastAPI as an isolated technology. Every concept we learn will eventually have a reason to exist in the AI Concierge.*
+
+---
+
 ## Step 1 — Check your Python installation
 
 Open your terminal:
